@@ -35,7 +35,7 @@
             $this->col[] = ["label"=>"representante","name"=>"representante"];
 			$this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Endereco","name"=>"endereco"];
-			$this->col[] = ["label"=>"Observacao","name"=>"observacoes"];
+			$this->col[] = ["label"=>"Observacao","name"=>"observacao"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
