@@ -4,8 +4,10 @@
 	use Request;
 	use DB;
 	use CRUDBooster;
+use Illuminate\Routing\Route;
+use Illuminate\View\View;
 
-	class AdminFuncionariosController extends \crocodicstudio\crudbooster\controllers\CBController {
+class AdminFuncionariosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -105,6 +107,8 @@
 	        */
 	        $this->button_selected = array();
 
+			$this->button_selected[] = ['label'=>'TesteBTN','icon'=>'fa fa-check','name'=>'TesteBTN'];
+
 	                
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -114,8 +118,9 @@
 	        | @type    = warning,success,danger,info        
 	        | 
 	        */
-	        $this->alert        = array();
-	                
+	        $this->alert = array();
+			$this->alert[] = ['message'=>'Funcionários sendo listados','type'=>'info'];
+
 
 	        
 	        /* 
@@ -129,6 +134,7 @@
 	        */
 	        $this->index_button = array();
 
+			$this->index_button[] = ['label'=>'Iníco Laravel','url'=>('/'),"icon"=>"fa fa-home"];
 
 
 	        /* 
@@ -252,7 +258,11 @@
 	    |
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
-	        //Your code here
+	        //$id_selected is an array of id 
+			//$button_name is a name that you have set at button_selected 
+			if($button_name == 'TesteBTN') {
+				DB::table('funcionarios')->whereIn('id',$id_selected)->update(['status'=>'Ativo']);
+			}
 	            
 	    }
 

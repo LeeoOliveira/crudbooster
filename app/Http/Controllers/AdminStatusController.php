@@ -93,7 +93,6 @@
 	        | 
 	        */
 	        $this->button_selected = array();
-
 	                
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -224,8 +223,7 @@
 	    |
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
-	        //Your code here
-	            
+			
 	    }
 
 
