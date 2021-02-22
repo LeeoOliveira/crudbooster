@@ -156,6 +156,8 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        |
 	        */
 	        $this->index_statistic = array();
+			$this->index_statistic[] = ['label'=>'Total Funcionários','count'=>DB::table('funcionarios')->count(),'icon'=>'fa fa-users','color'=>'success'];
+			$this->index_statistic[] = ['label'=>'Total de Empresas','count'=>DB::table('empresas')->count(),'icon'=>'fa fa-check','color'=>'success'];
 
 
 
