@@ -54,6 +54,17 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->form[] = ['label'=>'Idade','name'=>'idade','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Nascimento','name'=>'nascimento','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Salario','name'=>'salario','type'=>'float','validation'=>'required|double','width'=>'col-sm-9'];
+			$this->form[] = ['label'=>'Teste','type'=>'select','name'=>'nome','datatable'=>'funcionarios,nome'];
+			$this->form[] = ['label'=>'City','type'=>'select','name'=>'cities_id','datatable'=>'cities,name','parent_select'=>'provinces_id'];
+
+
+			// $columns[] = ['label'=>'Funcionario','name'=>'id','type'=>'datamodal','datamodal_table'=>'funcionarios', 'datamodal_columns'=>'name,price','datamodal_select_to'=>'price:price','datamodal_where'=>'','datamodal_size'=>'large'];
+			// $columns[] = ['label'=>'Email','name'=>'email','type'=>'text','required'=>true];
+			// $columns[] = ['label'=>'Status','name'=>'status','type'=>'text','required'=>true];
+			// $columns[] = ['label'=>'Salario','name'=>'salario','type'=>'text','required'=>true];
+			// $this->form[] = ['label'=>'Teste','name'=>'teste','type'=>'child','columns'=>$columns,'table'=>'empresas','foreign_key'=>'id_empresa'];
+
+			
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
