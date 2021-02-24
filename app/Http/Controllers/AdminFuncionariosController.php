@@ -42,6 +42,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->col[] = ["label"=>"Observacao","name"=>"observacao"];
 			$this->col[] = ["label"=>"Empresa","name"=>"id_empresa","join"=>"empresas,nome"];
 			$this->col[] = ["label"=>"Status","name"=>"status"];
+			
 
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -54,8 +55,10 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->form[] = ['label'=>'Idade','name'=>'idade','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Nascimento','name'=>'nascimento','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Salario','name'=>'salario','type'=>'float','validation'=>'required|double','width'=>'col-sm-9'];
-			$this->form[] = ['label'=>'Teste','type'=>'select','name'=>'nome','datatable'=>'funcionarios,nome'];
-			$this->form[] = ['label'=>'City','type'=>'select','name'=>'cities_id','datatable'=>'cities,name','parent_select'=>'provinces_id'];
+			$this->form[] = ['label'=>'Funcionario','type'=>'select','name'=>'nome','datatable'=>'funcionarios,nome'];
+			$this->form[] = ['label'=>'Empresa','type'=>'select','name'=>'empresas','datatable'=>'empresas,nome'];
+			$this->form[] = ['label'=>'Cidade','name'=>'cidade','type'=>'checkbox','datatable'=>'cidades,cidade'];
+
 
 
 			// $columns[] = ['label'=>'Funcionario','name'=>'id','type'=>'datamodal','datamodal_table'=>'funcionarios', 'datamodal_columns'=>'name,price','datamodal_select_to'=>'price:price','datamodal_where'=>'','datamodal_size'=>'large'];
