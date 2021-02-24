@@ -35,13 +35,14 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->col[] = ["label"=>"Nome","name"=>"nome"];
 			$this->col[] = ["label"=>"Email","name"=>"email"];
 			$this->col[] = ["label"=>"Endereco","name"=>"endereco"];
-			$this->col[] = ["label"=>"Cargo","name"=>"cargo"];
+			$this->col[] = ["label"=>"Cargo","name"=>"id_cargo", "join" => "cargos,cargo"];
 			$this->col[] = ["label"=>"Idade","name"=>"idade"];
 			$this->col[] = ["label"=>"Nascimento","name"=>"nascimento"];
 			$this->col[] = ["label"=>"Salario","name"=>"salario","callback_php"=>'number_format($row->salario)'];
 			$this->col[] = ["label"=>"Observacao","name"=>"observacao"];
 			$this->col[] = ["label"=>"Empresa","name"=>"id_empresa","join"=>"empresas,nome"];
-			$this->col[] = ["label"=>"Status","name"=>"status"];
+			$this->col[] = ["label"=>"Cidade","name"=>"id_cidade","join"=>"cidades,cidade"];
+			$this->col[] = ["label"=>"Status","name"=>"id_status", "join" => "status,status"];
 			
 
 			# END COLUMNS DO NOT REMOVE THIS LINE
@@ -51,13 +52,15 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->form[] = ['label'=>'Nome','name'=>'nome','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:funcionarios','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
 			$this->form[] = ['label'=>'Endereco','name'=>'endereco','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Cargo','name'=>'cargo','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Idade','name'=>'idade','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Cargo','type'=>'select','name'=>'cargo', 'validation' => 'required','datatable'=>'cargos,cargo'];
+			$this->form[] = ['label'=>'Idade','name'=>'idade','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2'];
 			$this->form[] = ['label'=>'Nascimento','name'=>'nascimento','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Salario','name'=>'salario','type'=>'float','validation'=>'required|double','width'=>'col-sm-9'];
+			$this->form[] = ['label'=>'Salario','name'=>'salario','type'=>'number', 'validation' => 'required','width'=>'col-sm-6'];
+			$this->form[] = ['label'=>'Status','type'=>'select','name'=>'status','datatable'=>'status,status'];
+			$this->form[] = ['label'=>'Observação','name'=>'observacao','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Funcionario','type'=>'select','name'=>'nome','datatable'=>'funcionarios,nome'];
-			$this->form[] = ['label'=>'Empresa','type'=>'select','name'=>'empresas','datatable'=>'empresas,nome'];
-			$this->form[] = ['label'=>'Cidade','name'=>'cidade','type'=>'checkbox','datatable'=>'cidades,cidade'];
+			$this->form[] = ['label'=>'Empresa','type'=>'select','name'=>'id_empresa','datatable'=>'empresas,nome'];
+			$this->form[] = ['label'=>'Cidade','name'=>'id_cidade','type'=>'checkbox','datatable'=>'cidades,cidade'];
 
 
 
