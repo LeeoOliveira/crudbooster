@@ -7,7 +7,7 @@
 use Illuminate\Routing\Route;
 use Illuminate\View\View;
 
-class AdminFuncionariosController extends \crocodicstudio\crudbooster\controllers\CBController {
+class AdminProdutosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -27,57 +27,29 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "funcionarios";
+			$this->table = "produtos";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Nome","name"=>"nome"];
-			$this->col[] = ["label"=>"Email","name"=>"email"];
-			$this->col[] = ["label"=>"Endereco","name"=>"endereco"];
-			$this->col[] = ["label"=>"Cargo","name"=>"id_cargo", "join" => "cargos,cargo"];
-			$this->col[] = ["label"=>"Idade","name"=>"idade"];
-			$this->col[] = ["label"=>"Nascimento","name"=>"nascimento"];
-			$this->col[] = ["label"=>"Salario","name"=>"salario","callback_php"=>'number_format($row->salario)'];
-			$this->col[] = ["label"=>"Observacao","name"=>"observacao"];
-			$this->col[] = ["label"=>"Empresa","name"=>"id_empresa","join"=>"empresas,nome"];
-			$this->col[] = ["label"=>"Cidade","name"=>"id_cidade","join"=>"cidades,cidade"];
-			$this->col[] = ["label"=>"Status","name"=>"id_status", "join" => "status,status"];
+			$this->col[] = ['label'=>'Produto','name'=>'nome'];
+			$this->col[] = ['label'=>'Descrição','name'=>'descricao'];
+			$this->col[] = ['label'=>'Preço','name'=>'preco'];
+			$this->col[] = ['label'=>'Categoria','name'=>'id_categorias','join'=>'categorias,nome'];
+			
 			
 
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Nome','name'=>'nome','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:funcionarios','width'=>'col-sm-10','placeholder'=>'Please enter a valid email address'];
-			$this->form[] = ['label'=>'Endereco','name'=>'endereco','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Empresa','type'=>'select2','name'=>'id_empresa','datatable'=>'empresas,nome', "validation" => 'required'];
-			$this->form[] = ['label'=>'Cargo','type'=>'select','name'=>'id_cargo', 'validation' => 'required','datatable'=>'cargos,cargo'];
-			$this->form[] = ['label'=>'Idade','name'=>'idade','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-2'];
-			$this->form[] = ['label'=>'Nascimento','name'=>'nascimento','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Salario','name'=>'salario','type'=>'number', 'validation' => 'required','width'=>'col-sm-6'];
-			$this->form[] = ['label'=>'Status','type'=>'select','name'=>'id_status', 'datatable'=>'status,status', 'width' => 'col-sm-4'];
-			$this->form[] = ['label'=>'Observação','name'=>'observacao','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Funcionario','type'=>'select2','name'=>'id','datatable'=>'funcionarios,nome'];
-			//	 CHECKBOX $this->form[] = ['label'=>'Cidade','name'=>'id_cidade','type'=>'checkbox','datatable'=>'cidades,cidade'];
-			$this->form[] = ['label'=>'Cidade','name'=>'id_cidade','type'=>'radio','datatable'=>'cidades,cidade'];
-			// DATAMODEL $this->form[] = ['label'=>'Funcionarios','name'=>'nome','type'=>'datamodal','datamodal_table'=>'funcionarios','datamodal_where'=>'','datamodal_columns'=>'nome,email,salario','datamodal_columns_alias'=>'Nome,Email,Salario'];	
-			$this->form[] = ['label'=>'Enviar Documento','name'=>'documento','type'=>'upload','validation'=>'image|max:1000'];
+			$this->form[] = ['label'=>'Nome do Produto','name'=>'nome','type'=>'text'];
+			$this->form[] = ['label'=>'Descrição','name'=>'descricao','type'=>'textarea'];
+			$this->form[] = ['label'=>'Preço','name'=>'preco','type'=>'number'];
+			$this->form[] = ['label'=>'Categoria','name'=>'id_categorias','type'=>'select','datatable'=>'categorias,nome'];
 			
-			
-
 			//
-			// $columns[] = ['label'=>'Produtos','name'=>'id_produtos','type'=>'datamodal','datamodal_table'=>'produtos','datamodal_columns'=>'nome,preco','datamodal_select_to'=>'preco:preco','datamodal_where'=>'','datamodal_size'=>'large'];
-			// $columns[] = ['label'=>'Preco','name'=>'preco','type'=>'number','required'=>true];
-			// $columns[] = ['label'=>'QTY','name'=>'quantidade','type'=>'number','required'=>true];
-			// $columns[] = ['label'=>'Discount','name'=>'desconto','type'=>'number','required'=>true];
-			// $columns[] = ['label'=>'Sub Total','name'=>'subtotal','type'=>'number','formula'=>"[quantidade] * [preco] - [desconto]","readonly"=>true,'required'=>true];
-			// $this->form[] = ['label'=>'Detalhes do Pedido','name'=>'detalhe_pedidos','type'=>'child','columns'=>$columns,'table'=>'detalhe_pedido','foreign_key'=>'id_pedidos'];
-
-
 			
-
 			
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -146,7 +118,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        | 
 	        */
 	        $this->alert = array();
-			$this->alert[] = ['message'=>'Funcionários sendo listados','type'=>'info'];
+			$this->alert[] = ['message'=>'Filmes sendo listados','type'=>'info'];
 
 
 	        
@@ -183,9 +155,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        |
 	        */
 	        $this->index_statistic = array();
-			$this->index_statistic[] = ['label'=>'Total Funcionários','count'=>DB::table('funcionarios')->count(),'icon'=>'fa fa-users','color'=>'success'];
-			$this->index_statistic[] = ['label'=>'Total de Empresas','count'=>DB::table('empresas')->count(),'icon'=>'fa fa-check','color'=>'success'];
-
+			$this->index_statistic[] = ['label'=>'Total de Produtos','count'=>DB::table('Produtos')->count(),'icon'=>'fa fa-file','color'=>'success'];
 
 
 	        /*
