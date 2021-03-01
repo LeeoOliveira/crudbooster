@@ -196,7 +196,13 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+	        $this->script_js = "
+			
+			$(function funcaoTeste(){
+				console.log('teste');
+			});
+			
+			";
 
 
             /*
@@ -227,7 +233,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        | ---------------------------------------------------------------------- 
 	        | Include Javascript File 
 	        | ---------------------------------------------------------------------- 
-	        | URL of your javascript each array 
+	        | URL of your javascript each array
 	        | $this->load_js[] = asset("myfile.js");
 	        |
 	        */
@@ -243,7 +249,11 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	        | $this->style_css = ".style{....}";
 	        |
 	        */
-	        $this->style_css = NULL;
+	        $this->style_css = "
+			.active{
+				color: red;
+			}
+			";
 	        
 	        
 	        
@@ -304,8 +314,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
-	            
+			// $query->where('id_status',1);
 	    }
 
 	    /*
@@ -376,7 +385,7 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 	    */
 	    public function hook_before_delete($id) {
 	        //Your code here
-
+			DB::table('produtos')->where('id_categorias',$id)->delete(); 
 	    }
 
 	    /* 
