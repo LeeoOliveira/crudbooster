@@ -9,7 +9,7 @@
       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class='form-group'>
           <label>Nome do Produto</label>
-          <input type='text' name='nome' required class='form-control'/>
+          <input type='text' name='nome' id="nome" required class='form-control'/>
         </div>
         <div class='form-group'>
           <label>Descrição</label>
@@ -21,7 +21,7 @@
         </div>
         <div class='form-group'>
           <label>Categoria</label>
-          <select type='select' name='select' required class='form-control'>
+          <select type='select' name='categoria' required class='form-control'>
           <option value=""></option>
             @foreach($categorias as $categoria)
             <option value="{{ $categoria->nome }}"> {{ $categoria->nome }}</option>
@@ -31,7 +31,7 @@
          
         <!-- etc .... -->
         <div class='panel-footer'>
-          <input type='submit' class='btn btn-primary' value='Save changes'/>
+          <input type='submit' class='btn btn-primary' value='Save'/>
         </div>
       </form>
     </div>

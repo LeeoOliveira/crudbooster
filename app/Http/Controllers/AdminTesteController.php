@@ -1,12 +1,16 @@
 <?php namespace App\Http\Controllers;
 
+use App\Produto;
 use crocodicstudio\crudbooster\helpers\CRUDBooster as HelpersCRUDBooster;
 use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
+use Illuminate\Support\Facades\Request as FacadesRequest;
+use PhpParser\Node\Stmt\Echo_;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
-	class AdminTesteController extends \crocodicstudio\crudbooster\controllers\CBController {
+class AdminTesteController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
@@ -258,6 +262,9 @@ use Session;
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+			// dd($_POST, 'awawd');
+			// dd($postdata);
+		
 
 	    }
 
@@ -270,7 +277,8 @@ use Session;
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
-
+			// dd($_POST, 'daw');
+			// dd($id, 'adadwa');
 	    }
 
 	    /* 
@@ -358,6 +366,16 @@ use Session;
 			return view('testeAdd',$data);
 		  }
 
+		  public function postUpdate($id){
+			$teste = Request::all();
+
+			$produto = new Produto();
+			$produto->atualiza($id, $teste);
+			
+			return redirect('admin/teste');
+		
+		  }
+
 		  public function getEdit($id) {
 			//Create an Auth
 			if(!CRUDBooster::isUpdate() && $this->global_privilege==FALSE || $this->button_edit==FALSE) {   
@@ -367,10 +385,11 @@ use Session;
 			$data = [];
 			$data['page_title'] = 'Edit Data';
 			$data['row'] = DB::table('produtos as p')
-			->select('categorias.nome as nome_categoria','p.id', 'p.id_categorias', 'p.nome', 'p.preco', 'p.descricao')
+			->select('categorias.id', 'categorias.nome as nome_categoria','p.id', 'p.id_categorias', 'p.nome', 'p.preco', 'p.descricao')
 			->join('categorias', 'p.id_categorias', '=', 'categorias.id')
 			->where('p.id',$id)->first();
-			$data['categorias'] = DB::table('categorias')->select('nome')->get();
+			$data['categorias'] = DB::table('categorias')->select('id', 'nome')->get();
+			// dd($data['categorias']);
 
 			// dd($data['row']);
 			//Please use cbView method instead view method from laravel
