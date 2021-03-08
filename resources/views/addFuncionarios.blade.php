@@ -16,8 +16,15 @@
           <input type='email' name='email' required class='form-control'/>
         </div>
         <div class='form-group'>
+          <label>CEP</label>
+          <input type='text' name='cep' id="cep" required class='form-control'/>
+          <button id="pesquisaCEP" style="width: 200px; height: 20px;">Buscar CEP</button>
+        </div>
+        <div class='form-group'>
           <label>Endereço</label>
-          <input type='text' name='endereco' required class='form-control'/>
+          <input type='text' name='endereco' id="endereco" required class='form-control'/>
+          <label>Número</label>
+          <input type='text' name='numero' required class='form-control'/>
         </div>
         <div class='form-group'>
           <label>Empresa</label>
@@ -82,4 +89,29 @@
       </form>
     </div>
   </div>
+  <script>
+    // function pesquisaCEP(event){
+      var botao = document.getElementById('pesquisaCEP');
+      botao.addEventListener("click", function(event){
+        event.preventDefault();
+        var cep = document.getElementById('cep').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET','https://viacep.com.br/ws/'+ cep +'/json');
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState == 4 & xhr.status == 200){
+                console.log(JSON.parse(xhr.responseText));
+                var retorno = JSON.parse(xhr.responseText);
+                var endereco = document.getElementById('endereco');
+                endereco.value = retorno['logradouro'];
+                endereco.disabled = true;
+
+            }
+        }
+    
+      xhr.send();
+      })
+     
+    // }
+
+  </script>
 @endsection
