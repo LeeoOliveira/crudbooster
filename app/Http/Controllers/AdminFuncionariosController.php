@@ -1,10 +1,18 @@
 <?php namespace App\Http\Controllers;
 
-	use Session;
+use App\Cargo;
+use App\Cidade;
+use App\Empresas;
+use App\Funcionarios;
+use App\Status;
+use Session;
 	use Request;
 	use DB;
 	use CRUDBooster;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\View\View;
 
 class AdminFuncionariosController extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -400,6 +408,29 @@ class AdminFuncionariosController extends \crocodicstudio\crudbooster\controller
 
 	    }
 
+		public function getAdd(){
+			if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {    
+				CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			  }
+			
+			$dados = [];
+			$dados['empresas'] = Empresas::listaEmpresas();
+			$dados['cargos'] = Cargo::all();
+			$dados['statuses'] = Status::all();
+			$dados['cidades'] = Cidade::all();
+			
+			return view('addFuncionarios', $dados);
+		}
+
+		public function postCadastrar(){
+			if(!CRUDBooster::isCreate() && $this->global_privilege==FALSE || $this->button_add==FALSE) {    
+				CRUDBooster::redirect(CRUDBooster::adminPath(),trans("crudbooster.denied_access"));
+			  }
+
+			$cadastra = new Funcionarios();
+			$cadastra->create(Request::all());
+			return redirect('admin/funcionarios');
+		}
 
 
 	    //By the way, you can still create your own method in here... :) 

@@ -8,7 +8,6 @@
       <form method='post' action='{{CRUDBooster::mainpath('update/'.$row->id)}}'>
       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class='form-group'>
-        
           <label>Name</label>
           <input type='text' name='nome' required class='form-control' value='{{$row->nome}}'/>
         </div>
